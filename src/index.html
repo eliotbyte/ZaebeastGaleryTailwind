@@ -13,6 +13,7 @@
       --static-padding: 1rem; /* Статический отступ */
       --container-padding: 1rem;
       --global-padding: 1rem; /* Глобальный отступ */
+      --background-color: #D3D0D8; /* Цвет фона */
     }
 
     @media (min-width: 640px) {
@@ -43,10 +44,17 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--background-color); /* Устанавливаем фон */
     }
     .global-padding {
       padding-left: var(--global-padding);
       padding-right: var(--global-padding);
+    }
+    .scroll-wrapper {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw); /* Центрируем контейнер по всей ширине */
+      margin-right: calc(50% - 50vw); /* Центрируем контейнер по всей ширине */
     }
     .scroll-container {
       display: flex;
@@ -54,15 +62,12 @@
       overflow-y: hidden; /* Отключаем вертикальный скроллбар */
       padding: 20px;
       gap: 20px;
-      width: 100vw; /* Занимает всю ширину окна */
-      margin-left: calc(50% - 50vw); /* Центрируем контейнер по всей ширине */
-      margin-right: calc(50% - 50vw); /* Центрируем контейнер по всей ширине */
+      width: 100%;
     }
     .invisible-padding {
       flex: 0 0 auto;
       width: calc(var(--container-padding) + var(--global-padding));
       height: 50px; /* Высота, которая была у bg-red-500 */
-      background-color: #f56565; /* Это соответствует классу bg-red-500 */
       margin-left: -20px; /* Убираем левый отступ */
       margin-right: -20px; /* Убираем правый отступ */
     }
@@ -92,13 +97,65 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    .scroll-button {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: calc(var(--container-padding) + var(--global-padding));
+      background: linear-gradient(to right, rgba(211, 208, 216, 1), rgba(211, 208, 216, 0));
+      cursor: pointer;
+      z-index: 10; /* Поднимаем кнопки выше остальных элементов */
+    }
+    .scroll-button.right {
+      right: 0;
+      background: linear-gradient(to left, rgba(211, 208, 216, 1), rgba(211, 208, 216, 0));
+    }
+    .scroll-button.left {
+      left: 0;
+      background: linear-gradient(to right, rgba(211, 208, 216, 1), rgba(211, 208, 216, 0));
+    }
   </style>
 </head>
-<body class="bg-gray-100">
+<body class="relative">
   <div class="container mx-auto py-12 global-padding">
     <h1 class="text-2xl font-bold text-header-text mb-12">Movies</h1>
-    <div class="scroll-container">
-      <div class="invisible-padding"></div>
+    <div class="scroll-wrapper">
+      <div class="scroll-button left"></div>
+      <div class="scroll-button right"></div>
+      <div class="scroll-container">
+        <div class="invisible-padding"></div>
+        <!-- 5 Centimeters per Second -->
+        <div class="scroll-item">
+          <div class="rounded-custom bg-orange-500 w-64 h-96 shadow-custom-normal shadow-custom-inner-1 shadow-custom-inner-2 hover-effect transform transition duration-300">
+            <img src="img/movie_cover_1.jpg" alt="5 Centimeters per Second" class="rounded-custom w-full h-full object-cover">
+          </div>
+          <div class="text-wrapper text-center mt-2">
+            <div class="text-header text-header-text font-semibold text-lg">5 Centimeters per Second</div>
+            <div class="text-subheader-text opacity-70 font-semibold text-md">2007</div>
+          </div>
+        </div>
+        <!-- The Shawshank Redemption -->
+        <div class="scroll-item">
+          <div class="rounded-custom bg-orange-500 w-64 h-96 shadow-custom-normal shadow-custom-inner-1 shadow-custom-inner-2 hover-effect transform transition duration-300">
+            <img src="img/movie_cover_2.jpg" alt="The Shawshank Redemption" class="rounded-custom w-full h-full object-cover">
+          </div>
+          <div class="text-wrapper text-center mt-2">
+            <div class="text-header text-header-text font-semibold text-lg">The Shawshank Redemption</div>
+            <div class="text-subheader-text opacity-70 font-semibold text-md">1994</div>
+          </div>
+        </div>
+        <!-- The Lord of the Rings: The Return of the King -->
+        <div class="scroll-item">
+          <div class="rounded-custom bg-orange-500 w-64 h-96 shadow-custom-normal shadow-custom-inner-1 shadow-custom-inner-2 hover-effect transform transition duration-300">
+            <img src="img/movie_cover_3.jpg" alt="The Lord of the Rings: The Return of the King" class="rounded-custom w-full h-full object-cover">
+          </div>
+          <div class="text-wrapper text-center mt-2">
+            <div class="text-header text-header-text font-semibold text-lg">The Lord of the Rings: The Return of the King</div>
+            <div class="text-subheader-text opacity-70 font-semibold text-md">2003</div>
+          </div>
+        </div>
+        <!-- Дублируем элементы -->
       <!-- 5 Centimeters per Second -->
       <div class="scroll-item">
         <div class="rounded-custom bg-orange-500 w-64 h-96 shadow-custom-normal shadow-custom-inner-1 shadow-custom-inner-2 hover-effect transform transition duration-300">
@@ -162,5 +219,27 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function scrollLeft() {
+        const container = document.querySelector('.scroll-container');
+        container.scrollBy({
+          left: -300,
+          behavior: 'smooth'
+        });
+      }
+
+      function scrollRight() {
+        const container = document.querySelector('.scroll-container');
+        container.scrollBy({
+          left: 300,
+          behavior: 'smooth'
+        });
+      }
+
+      document.querySelector('.scroll-button.left').onclick = scrollLeft;
+      document.querySelector('.scroll-button.right').onclick = scrollRight;
+    });
+  </script>
 </body>
 </html>

@@ -18,6 +18,7 @@ module.exports = {
       colors: {
         'header-text': '#424242',
         'subheader-text': '#3D4047',
+        'background-color': '#D3D0D8', // Добавляем новый цвет для фона
       },
       fontFamily: {
         'plus-jakarta': ['"Plus Jakarta Sans"', 'sans-serif'],
