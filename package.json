@@ -1,0 +1,16 @@
+{
+  "name": "zaebeast_galery_tailwind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tailwindcss build src/styles.css -o ./src/dist/style.css --watch",
+    "build": "tailwindcss build src/styles.css -o ./src/dist/style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.7"
+  }
+}
