@@ -11,10 +11,42 @@
   <style>
     :root {
       --static-padding: 1rem; /* Статический отступ */
+      --container-padding: 1rem;
+      --global-padding: 1rem; /* Глобальный отступ */
+    }
+
+    @media (min-width: 640px) {
+      :root {
+        --container-padding: calc((100vw - 640px) / 2);
+      }
+    }
+    @media (min-width: 768px) {
+      :root {
+        --container-padding: calc((100vw - 768px) / 2);
+      }
+    }
+    @media (min-width: 1024px) {
+      :root {
+        --container-padding: calc((100vw - 1024px) / 2);
+      }
+    }
+    @media (min-width: 1280px) {
+      :root {
+        --container-padding: calc((100vw - 1280px) / 2);
+      }
+    }
+    @media (min-width: 1536px) {
+      :root {
+        --container-padding: calc((100vw - 1536px) / 2);
+      }
     }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .global-padding {
+      padding-left: var(--global-padding);
+      padding-right: var(--global-padding);
     }
     .scroll-container {
       display: flex;
@@ -28,7 +60,11 @@
     }
     .invisible-padding {
       flex: 0 0 auto;
-      width: calc(var(--static-padding) + (100vw - 100%) / 2); /* Статический + динамический отступ */
+      width: calc(var(--container-padding) + var(--global-padding));
+      height: 50px; /* Высота, которая была у bg-red-500 */
+      background-color: #f56565; /* Это соответствует классу bg-red-500 */
+      margin-left: -20px; /* Убираем левый отступ */
+      margin-right: -20px; /* Убираем правый отступ */
     }
     .scroll-item {
       flex: 0 0 auto;
@@ -59,8 +95,8 @@
   </style>
 </head>
 <body class="bg-gray-100">
-  <div class="container mx-auto py-12">
-    <h1 class="text-2xl font-bold text-header-text mb-12 px-4">Movies</h1>
+  <div class="container mx-auto py-12 global-padding">
+    <h1 class="text-2xl font-bold text-header-text mb-12">Movies</h1>
     <div class="scroll-container">
       <div class="invisible-padding"></div>
       <!-- 5 Centimeters per Second -->
