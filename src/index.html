@@ -63,6 +63,11 @@
       padding: 20px;
       gap: 20px;
       width: 100%;
+      scrollbar-width: none; /* Для Firefox */
+      -ms-overflow-style: none; /* Для Internet Explorer и Edge */
+    }
+    .scroll-container::-webkit-scrollbar {
+      display: none;
     }
     .invisible-padding {
       flex: 0 0 auto;
@@ -119,8 +124,8 @@
 </head>
 <body class="relative">
   <div class="container mx-auto py-12 global-padding">
-    <h1 class="text-2xl font-bold text-header-text mb-12">Movies</h1>
-    <div class="scroll-wrapper">
+    <h1 class="text-2xl font-bold text-header-text">Movies</h1>
+    <div class="scroll-wrapper relative -translate-y-2 w-screen mx-auto">
       <div class="scroll-button left"></div>
       <div class="scroll-button right"></div>
       <div class="scroll-container">
@@ -217,6 +222,9 @@
           <div class="text-subheader-text opacity-70 font-semibold text-md">2003</div>
         </div>
       </div>
+
+      
+      <div class="invisible-padding"></div>
     </div>
   </div>
   <script>
@@ -224,7 +232,7 @@
       function scrollLeft() {
         const container = document.querySelector('.scroll-container');
         container.scrollBy({
-          left: -300,
+          left: -840,
           behavior: 'smooth'
         });
       }
@@ -232,7 +240,7 @@
       function scrollRight() {
         const container = document.querySelector('.scroll-container');
         container.scrollBy({
-          left: 300,
+          left: 840,
           behavior: 'smooth'
         });
       }
