@@ -7,9 +7,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        'custom-normal': '0 4px 8px rgba(0, 0, 0, 0.25)',
-        'custom-inner-1': 'inset 0 -4px 16px rgba(0, 0, 0, 0.10)',
-        'custom-inner-2': 'inset 0 4px 16px rgba(255, 255, 255, 0.10)',
+        'custom-shadowed-button': '0 4px 8px rgba(0, 0, 0, 0.25), inset 0 -4px 16px rgba(0, 0, 0, 0.10), inset 0 4px 16px rgba(255, 255, 255, 0.10)',
         'custom-hover': '15px 20px 30px rgba(0, 0, 0, 0.35)',
       },
       borderRadius: {
